@@ -4,11 +4,9 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\SuperAdmin\InvoiceController;
 use App\Http\Controllers\SuperAdmin\UserController;
 use App\Http\Controllers\User\BruneiTransactionController;
-use App\Http\Controllers\User\IndoTransaksiController;
 use App\Http\Controllers\User\MalaysiaTransactionController;
 use App\Http\Controllers\User\ReportController as UserReportController;
 use App\Http\Controllers\User\SingaporeTransactionController;
-use App\Http\Controllers\User\TransaksiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -59,31 +57,37 @@ Route::group(['middleware' => ['role:User']], function () {
         Route::get('/report', 'index')->name('user.report.index');
     });
 
-    // Transaksi Malaysia
-    Route::controller(MalaysiaTransactionController::class)->group(function(){
-        Route::get('/{id}/malaysia/transaction', 'show')->name('malaysia.product.show');
-        Route::post('/store/transaction', 'store')->name('malaysia.transaction.store');
-        Route::get('/malaysia/invoice', 'invoice')->name('malaysia.transaction.invoice');
-        Route::get('/{id}/malaysia/invoice', 'detailinvoice')->name('malaysia.transaction.detailinvoice');
-        Route::put('/{id}/invoice', 'update')->name('malaysia.transaction.updateinvoice');
+    Route::prefix('malaysia')->group(function(){
+        // Transaksi Malaysia
+        Route::controller(MalaysiaTransactionController::class)->group(function(){
+            Route::get('/{id}/transaction', 'show')->name('malaysia.product.show');
+            Route::post('/store/transaction', 'store')->name('malaysia.transaction.store');
+            Route::get('/invoice', 'invoice')->name('malaysia.transaction.invoice');
+            Route::get('/{id}/invoice', 'detailinvoice')->name('malaysia.transaction.detailinvoice');
+            Route::put('/{id}/invoice', 'update')->name('malaysia.transaction.updateinvoice');
+        });
     });
 
-    // Transaksi Singapore
-    Route::controller(SingaporeTransactionController::class)->group(function(){
-        Route::get('/{id}/singapore/transaction', 'show')->name('singapore.product.show');
-        Route::post('/store/transaction', 'store')->name('singapore.transaction.store');
-        Route::get('/singapore/invoice', 'invoice')->name('singapore.transaction.invoice');
-        Route::get('/{id}/singapore/invoice', 'detailinvoice')->name('singapore.transaction.detailinvoice');
-        Route::put('/{id}/invoice', 'update')->name('singapore.transaction.updateinvoice');
+    Route::prefix('singapore')->group(function(){
+        // Transaksi Singapore
+        Route::controller(SingaporeTransactionController::class)->group(function(){
+            Route::get('/{id}/transaction', 'show')->name('singapore.product.show');
+            Route::post('/store/transaction', 'store')->name('singapore.transaction.store');
+            Route::get('/invoice', 'invoice')->name('singapore.transaction.invoice');
+            Route::get('/{id}/invoice', 'detailinvoice')->name('singapore.transaction.detailinvoice');
+            Route::put('/{id}/invoice', 'update')->name('singapore.transaction.updateinvoice');
+        });
     });
 
-    // Transaksi Brunei
-    Route::controller(BruneiTransactionController::class)->group(function(){
-        Route::get('/{id}/brunei/transaction', 'show')->name('brunei.product.show');
-        Route::post('/store/transaction', 'store')->name('brunei.transaction.store');
-        Route::get('/brunei/invoice', 'invoice')->name('brunei.transaction.invoice');
-        Route::get('/{id}/brunei/invoice', 'detailinvoice')->name('brunei.transaction.detailinvoice');
-        Route::put('/{id}/invoice', 'update')->name('brunei.transaction.updateinvoice');
+    Route::prefix('brunei')->group(function(){
+        // Transaksi Brunei
+        Route::controller(BruneiTransactionController::class)->group(function(){
+            Route::get('/{id}/transaction', 'show')->name('brunei.product.show');
+            Route::post('/store/transaction', 'store')->name('brunei.transaction.store');
+            Route::get('/invoice', 'invoice')->name('brunei.transaction.invoice');
+            Route::get('/{id}/invoice', 'detailinvoice')->name('brunei.transaction.detailinvoice');
+            Route::put('/{id}/invoice', 'update')->name('brunei.transaction.updateinvoice');
+        });
     });
 });
 
