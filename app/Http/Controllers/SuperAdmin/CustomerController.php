@@ -18,7 +18,7 @@ class CustomerController extends Controller
     {
         $customer = User::count();
         $sales = Transaction::count();
-        return view('dashboard.content', compact('customer', 'sales'));
+        return view('dashboard.content', compact('customer', 'salesgit '));
     }
 
     /**
