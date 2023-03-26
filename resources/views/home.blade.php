@@ -96,7 +96,7 @@
 
     @yield('js')
     <script>
-        $('#hreflogout').on('click', function(){
+        $('li #hreflogout').on('click', function(){
             $('#logout').click();
         });
     </script>

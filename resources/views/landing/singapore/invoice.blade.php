@@ -44,7 +44,7 @@
                                     @endif
                                 </div>
                                 <div class="position-absolute bottom-0 end-0 my-3">
-                                    <a href="{{ route('brunei.transaction.detailinvoice', $data->id) }}" class="mx-3 btn btn-info">Send proof of payment</a>
+                                    <a href="{{ route('singapore.transaction.detailinvoice', $data->id) }}" class="mx-3 btn btn-info">Send proof of payment</a>
                                 </div>
                             </div>
                         </div>

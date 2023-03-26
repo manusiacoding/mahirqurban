@@ -8,7 +8,7 @@
                 </a>
               </li>
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('transaction.invoice') ? 'active':'' }}" href="{{ route('transaction.invoice') }}">
+            <a class="nav-link @if(request()->routeIs('brunei.transaction.invoice') || request()->routeIs('malaysia.transaction.invoice') || request()->routeIs('singapore.transaction.invoice')) active @endif" href="@if(request()->routeIs('brunei.transaction.invoice')) {{ route('brunei.transaction.invoice') }} @elseif(request()->routeIs('singapore.transaction.invoice')) {{ route('singapore.transaction.invoice') }} @elseif(request()->routeIs('malaysia.transaction.invoice')) {{ route('malaysia.transaction.invoice') }} @endif">
                 <img src="{{ asset('landing/img/icons/icon-invoice.png') }}" width="30" height="30" alt="">
                 <span class="small d-block">Invoice</span>
             </a>
