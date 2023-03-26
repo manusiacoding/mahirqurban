@@ -64,6 +64,15 @@
                     @endforeach
                     </div>
                 </li>
+                @auth
+                    <li>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <a href="javascript:void(0)" class="nav-item nav-link" id="hreflogout">Logout</a>
+                            <button type="submit" class="d-none" id="logout"></button>
+                        </form>
+                    </li>
+                @endauth
             </div>
         </div>
     </nav>
@@ -86,6 +95,11 @@
     @include('Components.js')
 
     @yield('js')
+    <script>
+        $('#hreflogout').on('click', function(){
+            $('#logout').click();
+        });
+    </script>
 </body>
 
 </html>

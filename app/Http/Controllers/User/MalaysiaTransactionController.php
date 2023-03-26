@@ -8,9 +8,8 @@ use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\TryCatch;
 
-class TransaksiController extends Controller
+class MalaysiaTransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,7 +36,7 @@ class TransaksiController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-    */
+     */
     public function store(Request $request)
     {
         $orderid = 'MAHIR-'.mt_rand(0, 9999999999);
@@ -51,7 +50,7 @@ class TransaksiController extends Controller
             'total_price'       => $request->totalprice
         ]);
 
-        return redirect()->route('brunei.transaction.invoice')->with('success', 'Transaction successfully!');
+        return redirect()->route('malaysia.transaction.invoice')->with('success', 'Transaction successfully!');
     }
 
     /**
@@ -67,7 +66,7 @@ class TransaksiController extends Controller
         ->where('transactions.user_id', Auth::user()->id)
         ->get();
 
-        return view('landing.brunei.invoice', compact(['transaction']));
+        return view('landing.malaysia.invoice', compact(['transaction']));
     }
 
 
@@ -82,7 +81,7 @@ class TransaksiController extends Controller
         $transaction = Transaction::find($id);
         $product = Product::find($transaction->product_id);
 
-        return view('landing.brunei.detailinvoice', compact(['transaction', 'product']));
+        return view('landing.malaysia.detailinvoice', compact(['transaction', 'product']));
     }
 
     /**
@@ -95,7 +94,7 @@ class TransaksiController extends Controller
     {
         $product = Product::find($id);
 
-        return view('landing.brunei.transaction', compact(['product']));
+        return view('landing.malaysia.transaction', compact(['product']));
     }
 
     /**
@@ -131,7 +130,7 @@ class TransaksiController extends Controller
             'status'        => 'Waiting to be accepted'
         ]);
 
-        return redirect()->route('brunei.transaction.invoice')->with('success', 'Detail invoice has been updated successfully!');
+        return redirect()->route('malaysia.transaction.invoice')->with('success', 'Detail invoice has been updated successfully!');
     }
 
     /**

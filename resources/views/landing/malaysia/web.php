@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\SuperAdmin\InvoiceController;
 use App\Http\Controllers\SuperAdmin\UserController;
 use App\Http\Controllers\User\IndoTransaksiController;
-use App\Http\Controllers\User\MalaysiaTransactionController;
 use App\Http\Controllers\User\ReportController as UserReportController;
 use App\Http\Controllers\User\TransaksiController;
 use Illuminate\Http\Request;
@@ -59,28 +58,19 @@ Route::group(['middleware' => ['role:User']], function () {
 
     // Transaction & Invoice Routes
     Route::controller(TransaksiController::class)->group(function(){
-        Route::get('/{id}/brunei/transaction', 'show')->name('product.show');
+        Route::get('/{id}/transaction', 'show')->name('product.show');
         Route::post('/store/transaction', 'store')->name('transaction.store');
-        Route::get('/brunei/invoice', 'invoice')->name('transaction.invoice');
-        Route::get('/{id}/brunei/invoice', 'detailinvoice')->name('transaction.detailinvoice');
+        Route::get('/invoice', 'invoice')->name('transaction.invoice');
+        Route::get('/{id}/invoice', 'detailinvoice')->name('transaction.detailinvoice');
         Route::put('/{id}/invoice', 'update')->name('transaction.updateinvoice');
     });
 
     // Transaksi indo
-    // Route::controller(IndoTransaksiController::class)->group(function() {
-    //     Route::get('{id}/produk', 'show')->name('produk');
-    //     Route::get('/{id}/invoice-indo', 'invoice')->name('invoice-indo');
-    //     Route::post('/store/transaksi', 'store')->name('store');
-    //     // Route::post('/midtrans-callback', 'callback');
-    // });
-
-    // Transaksi Malaysia
-    Route::controller(MalaysiaTransactionController::class)->group(function(){
-        Route::get('/{id}/malaysia/transaction', 'show')->name('malaysia.product.show');
-        Route::post('/store/transaction', 'store')->name('malaysia.transaction.store');
-        Route::get('/malaysia/invoice', 'invoice')->name('malaysia.transaction.invoice');
-        Route::get('/{id}/malaysia/invoice', 'detailinvoice')->name('malaysia.transaction.detailinvoice');
-        Route::put('/{id}/invoice', 'update')->name('malaysia.transaction.updateinvoice');
+    Route::controller(IndoTransaksiController::class)->group(function() {
+        Route::get('{id}/produk', 'show')->name('produk');
+        Route::get('/{id}/invoice-indo', 'invoice')->name('invoice-indo');
+        Route::post('/store/transaksi', 'store')->name('store');
+        // Route::post('/midtrans-callback', 'callback');
     });
 });
 
