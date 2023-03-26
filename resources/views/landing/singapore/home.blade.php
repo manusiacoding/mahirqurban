@@ -8,7 +8,7 @@
             <h1 class="mb-5">Banyak Manfaat, Dan Berkah</h1>
         </div>
         <div class="row gx-4">
-            @foreach ($productMalaysia as $data)
+            @foreach ($productSingapore as $data)
                 <div class="col-md-6 col-lg-6 col-xl-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="product-item">
                         <div class="position-relative text-center mt-4">
@@ -17,7 +17,7 @@
                         <div class="text-center p-4">
                             <a class="d-block h5" href="">{{ $data->name }}</a>
                             <span class="text-primary me-1">${{ $data->price }}</span><br><br>
-                            <a href="{{ route('malaysia.product.show', $data->id) }}" class="btn btn-primary">Buy</a>
+                            <a href="{{ route('singapore.product.show', $data->id) }}" class="btn btn-primary">Buy</a>
                         </div>
                     </div>
                 </div>

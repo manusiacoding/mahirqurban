@@ -6,6 +6,7 @@ use App\Http\Controllers\SuperAdmin\UserController;
 use App\Http\Controllers\User\IndoTransaksiController;
 use App\Http\Controllers\User\MalaysiaTransactionController;
 use App\Http\Controllers\User\ReportController as UserReportController;
+use App\Http\Controllers\User\SingaporeTransactionController;
 use App\Http\Controllers\User\TransaksiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -81,6 +82,15 @@ Route::group(['middleware' => ['role:User']], function () {
         Route::get('/malaysia/invoice', 'invoice')->name('malaysia.transaction.invoice');
         Route::get('/{id}/malaysia/invoice', 'detailinvoice')->name('malaysia.transaction.detailinvoice');
         Route::put('/{id}/invoice', 'update')->name('malaysia.transaction.updateinvoice');
+    });
+
+    // Transaksi Malaysia
+    Route::controller(SingaporeTransactionController::class)->group(function(){
+        Route::get('/{id}/singapore/transaction', 'show')->name('singapore.product.show');
+        Route::post('/store/transaction', 'store')->name('singapore.transaction.store');
+        Route::get('/singapore/invoice', 'invoice')->name('singapore.transaction.invoice');
+        Route::get('/{id}/singapore/invoice', 'detailinvoice')->name('singapore.transaction.detailinvoice');
+        Route::put('/{id}/invoice', 'update')->name('singapore.transaction.updateinvoice');
     });
 });
 

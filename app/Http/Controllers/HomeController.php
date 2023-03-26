@@ -38,6 +38,10 @@ class HomeController extends Controller
             $productMalaysia = Product::where('country', 'Malaysia')->get();
             return view('landing.malaysia.home', compact(['productMalaysia']));
         }
+        else if($request->user()->hasRole('User') && $request->user()->country == "Singapore"){
+            $productSingapore = Product::where('country', 'Singapore')->get();
+            return view('landing.singapore.home', compact(['productSingapore']));
+        }
         else if($request->user()->hasRole('User') && $request->user()->country == "Brunei Darussalam"){
             $product = Product::where('country', 'Brunei Darussalam')->get();
             return view('landing.brunei.home', compact(['product']));
