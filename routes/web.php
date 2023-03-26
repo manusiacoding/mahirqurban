@@ -31,9 +31,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('landing');
 
-Route::get('/dashboard', function () {
-    return view('dashboard.content');
-})->name('dashboard.index');
+// Route::get('/dashboard', function () {
+//     return view('dashboard.content');
+// })->name('dashboard.index');
 
 Route::get('/dashboard', [CustomerController::class, 'index'])->name('dashboard.index');
 

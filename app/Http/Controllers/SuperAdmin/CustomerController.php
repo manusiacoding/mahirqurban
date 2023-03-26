@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class CustomerController extends Controller
     public function index()
     {
         $customer = User::count();
-        return view('dashboard.content', compact('customer'));
+        $sales = Transaction::count();
+        return view('dashboard.content', compact('customer', 'sales'));
     }
 
     /**
