@@ -11,7 +11,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('transaction.updateinvoice', $transaction->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('brunei.transaction.updateinvoice', $transaction->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('put')
                             <div class="mb-3">

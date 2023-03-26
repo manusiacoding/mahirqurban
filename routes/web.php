@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\SuperAdmin\InvoiceController;
 use App\Http\Controllers\SuperAdmin\UserController;
+use App\Http\Controllers\User\BruneiTransactionController;
 use App\Http\Controllers\User\IndoTransaksiController;
 use App\Http\Controllers\User\MalaysiaTransactionController;
 use App\Http\Controllers\User\ReportController as UserReportController;
@@ -58,23 +59,6 @@ Route::group(['middleware' => ['role:User']], function () {
         Route::get('/report', 'index')->name('user.report.index');
     });
 
-    // Transaction & Invoice Routes
-    Route::controller(TransaksiController::class)->group(function(){
-        Route::get('/{id}/brunei/transaction', 'show')->name('product.show');
-        Route::post('/store/transaction', 'store')->name('transaction.store');
-        Route::get('/brunei/invoice', 'invoice')->name('transaction.invoice');
-        Route::get('/{id}/brunei/invoice', 'detailinvoice')->name('transaction.detailinvoice');
-        Route::put('/{id}/invoice', 'update')->name('transaction.updateinvoice');
-    });
-
-    // Transaksi indo
-    // Route::controller(IndoTransaksiController::class)->group(function() {
-    //     Route::get('{id}/produk', 'show')->name('produk');
-    //     Route::get('/{id}/invoice-indo', 'invoice')->name('invoice-indo');
-    //     Route::post('/store/transaksi', 'store')->name('store');
-    //     // Route::post('/midtrans-callback', 'callback');
-    // });
-
     // Transaksi Malaysia
     Route::controller(MalaysiaTransactionController::class)->group(function(){
         Route::get('/{id}/malaysia/transaction', 'show')->name('malaysia.product.show');
@@ -84,13 +68,22 @@ Route::group(['middleware' => ['role:User']], function () {
         Route::put('/{id}/invoice', 'update')->name('malaysia.transaction.updateinvoice');
     });
 
-    // Transaksi Malaysia
+    // Transaksi Singapore
     Route::controller(SingaporeTransactionController::class)->group(function(){
         Route::get('/{id}/singapore/transaction', 'show')->name('singapore.product.show');
         Route::post('/store/transaction', 'store')->name('singapore.transaction.store');
         Route::get('/singapore/invoice', 'invoice')->name('singapore.transaction.invoice');
         Route::get('/{id}/singapore/invoice', 'detailinvoice')->name('singapore.transaction.detailinvoice');
         Route::put('/{id}/invoice', 'update')->name('singapore.transaction.updateinvoice');
+    });
+
+    // Transaksi Brunei
+    Route::controller(BruneiTransactionController::class)->group(function(){
+        Route::get('/{id}/brunei/transaction', 'show')->name('brunei.product.show');
+        Route::post('/store/transaction', 'store')->name('brunei.transaction.store');
+        Route::get('/brunei/invoice', 'invoice')->name('brunei.transaction.invoice');
+        Route::get('/{id}/brunei/invoice', 'detailinvoice')->name('brunei.transaction.detailinvoice');
+        Route::put('/{id}/invoice', 'update')->name('brunei.transaction.updateinvoice');
     });
 });
 

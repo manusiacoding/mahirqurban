@@ -8,9 +8,8 @@ use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\TryCatch;
 
-class TransaksiController extends Controller
+class BruneiTransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,7 +36,7 @@ class TransaksiController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-    */
+     */
     public function store(Request $request)
     {
         $orderid = 'MAHIR-'.mt_rand(0, 9999999999);
@@ -52,6 +51,19 @@ class TransaksiController extends Controller
         ]);
 
         return redirect()->route('brunei.transaction.invoice')->with('success', 'Transaction successfully!');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $product = Product::find($id);
+
+        return view('landing.brunei.transaction', compact(['product']));
     }
 
     /**
@@ -83,19 +95,6 @@ class TransaksiController extends Controller
         $product = Product::find($transaction->product_id);
 
         return view('landing.brunei.detailinvoice', compact(['transaction', 'product']));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $product = Product::find($id);
-
-        return view('landing.brunei.transaction', compact(['product']));
     }
 
     /**
