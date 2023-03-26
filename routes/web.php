@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\SuperAdmin\CustomerController;
 use App\Http\Controllers\SuperAdmin\InvoiceController;
 use App\Http\Controllers\SuperAdmin\UserController;
 use App\Http\Controllers\User\IndoTransaksiController;
@@ -31,6 +32,8 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard.content');
 })->name('dashboard.index');
+
+Route::get('/dashboard', [CustomerController::class, 'index'])->name('dashboard.index');
 
 Route::get('/login', function () {
     return view('auth.login');
